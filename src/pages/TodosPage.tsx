@@ -3,10 +3,16 @@ import { TodoForm } from '../components/TodoForm'
 import { TodoList } from '../components/TodoList'
 import { ITodo } from '../interfaces'
 
+
+import { ModalWindowContainer } from '../components/index'
+
+
+
 declare var confirm: (question: string) => boolean
 
 export const TodosPage: React.FC = () => {
   const [todos, setTodos] = useState<ITodo[]>([])
+
 
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem('todos') || '[]') as ITodo[]
@@ -17,9 +23,9 @@ export const TodosPage: React.FC = () => {
     localStorage.setItem('todos', JSON.stringify(todos))
   }, [todos])
 
-  const addHandler = (title: string) => {
+  const addHandler = (title2: string) => {
     const newTodo: ITodo = {
-      title: title,
+      title: title2,
       id: Date.now(),
       completed: false
     }
@@ -37,13 +43,22 @@ export const TodosPage: React.FC = () => {
     )
   }
 
+
+
   return (
     <React.Fragment>
       <TodoForm onAdd={addHandler} />
       <TodoList
-        todos={todos}
+        todosOut={todos}
         onToggle={toggleHandler}
       />
+      <ModalWindowContainer />
+
+
+
+
+
     </React.Fragment>
+
   )
 }

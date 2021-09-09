@@ -5,12 +5,12 @@ interface TodoFormProps {
 }
 
 export const TodoForm: React.FC<TodoFormProps> = props => {
-  const ref = useRef<HTMLInputElement>(null)
+  const ref2 = useRef<HTMLInputElement>(null)
 
   const keyPressHandler = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      props.onAdd(ref.current!.value)
-      ref.current!.value = ''
+      props.onAdd(ref2.current!.value)
+      ref2.current!.value = ''
     }
   }
 
@@ -19,7 +19,7 @@ export const TodoForm: React.FC<TodoFormProps> = props => {
       <input
         // onChange={changeHandler}
         // value={title}
-        ref={ref}
+        ref={ref2}
         type="text"
         id="title"
         placeholder="enter your item"

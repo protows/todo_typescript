@@ -2,35 +2,36 @@ import React from 'react'
 import { ITodo } from '../interfaces'
 
 type TodoListProps = {
-  todos: ITodo[]
+  todosOut: ITodo[],
   onToggle(id: number): void
 }
+// export const TodoList: React.FC<TodoListProps> = props => {
 
 export const TodoList: React.FC<TodoListProps> = ({
-  todos,
+  todosOut,
   onToggle
 }) => {
-  if (todos.length === 0) {
+  if (todosOut.length === 0) {
     return <p className="center">No data yet</p>
   }
 
   return (
     <ul className="mt2">
-      {todos.map(todo => {
+      {todosOut.map(todosOut => {
         const classes = ['todo']
-        if (todo.completed) {
+        if (todosOut.completed) {
           classes.push('completed')
         }
 
         return (
-          <li className={classes.join(' ')} key={todo.id}>
+          <li className={classes.join(' ')} key={todosOut.id}>
             <label>
               <input
                 type="checkbox"
-                checked={todo.completed}
-                onChange={onToggle.bind(null, todo.id)}
+                checked={todosOut.completed}
+                onChange={onToggle.bind(null, todosOut.id)}
               />
-              <span>{todo.title}</span>
+              <span>{todosOut.title}</span>
             </label>
           </li>
         )
