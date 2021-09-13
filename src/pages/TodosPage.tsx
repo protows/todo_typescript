@@ -2,16 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { TodoForm } from '../components/TodoForm'
 import { TodoList } from '../components/TodoList'
 import { ITodo } from '../interfaces'
-
-
 import { ModalWindowContainer } from '../components/index'
-
-
 
 declare var confirm: (question: string) => boolean
 
+
 export const TodosPage: React.FC = () => {
   const [todos, setTodos] = useState<ITodo[]>([])
+
+
 
 
   useEffect(() => {
@@ -24,6 +23,7 @@ export const TodosPage: React.FC = () => {
   }, [todos])
 
   const addHandler = (title2: string) => {
+    console.log("GO addInputButtonHandler in TodoPage", title2);
     const newTodo: ITodo = {
       title: title2,
       id: Date.now(),
@@ -43,21 +43,13 @@ export const TodosPage: React.FC = () => {
     )
   }
 
-
-
   return (
     <React.Fragment>
-      <TodoForm onAdd={addHandler} />
       <TodoList
         todosOut={todos}
         onToggle={toggleHandler}
       />
-      <ModalWindowContainer />
-
-
-
-
-
+      <ModalWindowContainer onAdd={addHandler} />
     </React.Fragment>
 
   )

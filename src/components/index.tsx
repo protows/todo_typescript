@@ -6,7 +6,15 @@ import Button from '../components/MWButton'
 import CloseButton from '../components/CloseButton'
 import { ThemeProvider, theme } from '../components/theme'
 
-export const ModalWindowContainer: React.FC = () => {
+import { InputTodoForm } from '../components/InputTodoForm'
+
+
+interface InputTodoFormProps {
+	onAdd(title: string): void
+}
+
+
+export const ModalWindowContainer: React.FC<InputTodoFormProps> = (props) => {
 
 	// function ModalWindowContainer() {
 	const [effect, setEffect] = useState<AnimationType>('effect-1')
@@ -16,6 +24,14 @@ export const ModalWindowContainer: React.FC = () => {
 		setOpen(false)
 	}
 
+	const addHandler = (text1: string) => {
+		console.log("GO addInputButtonHandler in index", text1);
+		props.onAdd(text1)
+		setOpen(false)
+
+
+	}
+
 	return (
 		<React.Fragment>
 			<ThemeProvider theme={theme}>
@@ -23,13 +39,12 @@ export const ModalWindowContainer: React.FC = () => {
 					<img alt="Code" src="./img/code.png" className="img-fluid" />
 
 					<p>omes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, writ.</p>
-					<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 .</p>
-					<p>
-						There are many variations of passages of Lorem Ipsum available,
-						but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-					</p>
-					<p>ombined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
+
 					<CloseButton handleEvent={() => closeModalWindow()} text={'Close'} />
+					<InputTodoForm onAdd={addHandler} />
+
+
+
 				</ModalWindow>
 
 				<Button handleEvent={() => setOpen(true)} text={'Open Modal'} />
